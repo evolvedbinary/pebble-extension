@@ -2328,10 +2328,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@types/awesomplete@1.1.10":
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/@types/awesomplete/-/awesomplete-1.1.10.tgz#402ba293273b3d3a40c3569f123e2fa0d2681bdf"
-  integrity sha512-rNtfXy5pkneFI7zeMOiZ6ES9NgLt8PVuCtEH/K1QCsB6CSRrKjEbrbqWH1MizJ3zyfJH7dfEfRdkP+CyqaHMHQ==
+"@types/awesomplete@1.1.11":
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/@types/awesomplete/-/awesomplete-1.1.11.tgz#80834b518b032393a7229cc3c4b67572b55c0f3d"
+  integrity sha512-/AXbKjh/1NxoOLeig0czba6FYqDDLC2wGz2dXuLtTmvz+8oIOaSbTA3R37sNZSQpiVr7QDeZmj3r9kKHRckDjQ==
 
 "@types/base64-arraybuffer@0.1.0":
   version "0.1.0"
