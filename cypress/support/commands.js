@@ -27,7 +27,9 @@ Cypress.Commands.add("connect", () => {
 
 })
 Cypress.Commands.overwrite('visit', (orig, url, options) => {
-    // this is a fix to include the process variable when using the Electron browser
+    // this is a fix to include the process variable when using the Electron
+    // browser.
+    // see https://github.com/eclipse-theia/theia/issues/9751
     return orig(url, Cypress.isBrowser('electron') ? {
         ...options,
         onBeforeLoad(win) {
