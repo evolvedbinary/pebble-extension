@@ -26,9 +26,12 @@
     width: 4rem;
     padding-top: 3rem;
     background: url(fusion.svg);
+    filter: drop-shadow(1px 3px 3px #1e1e1e);
+
     
     &-full {
       background: url(fusion-full.svg);
+      filter: drop-shadow(1px 3px 3px #1e1e1e);
       margin-left: 1rem;
       margin-right: 1rem;
     }
@@ -42,7 +45,8 @@
     &::before {
       display: inline-block;
       content: "";
-      background: url(fusion.svg);      
+      background: url(fusion.svg);
+      filter: drop-shadow(1px 3px 3px #1e1e1e);      
       width: 100%;
       background-position-x: center;
       height: 0.7rem;
@@ -60,6 +64,7 @@
       display: inline-block;
       content: "";
       background: url(fusion.svg);
+      filter: drop-shadow(1px 3px 3px #1e1e1e);
       width: 2rem;
       height: 1.95rem;
       background-position: center;
@@ -70,6 +75,7 @@
 
   &-toolbar-icon {
     background: url(fusion.svg);
+    filter: drop-shadow(1px 3px 3px #1e1e1e);
     padding-top: 5%;
     width: 10%;
     background-position-x: right;
@@ -81,6 +87,7 @@
 
 .theia-icon {
   background: url(fusion.svg);
+  filter: drop-shadow(1px 3px 3px #1e1e1e);
   display: inline-block;
   background-size: contain;
   background-repeat: no-repeat;
