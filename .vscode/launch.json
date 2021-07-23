@@ -9,10 +9,13 @@
             "request": "launch",
             "name": "Start Browser Backend",
             "program": "${workspaceRoot}/browser-app/src-gen/backend/main.js",
+            "cwd": "${workspaceRoot}/browser-app",
             "args": [
                 "--loglevel=debug",
                 "--port=3000",
-                "--no-cluster"
+                "--app-project-path=${workspaceRoot}/browser-app",
+                "--no-cluster",
+                "--hosted-plugin-inspect=9339"
             ],
             "env": {
                 "NODE_ENV": "development"
@@ -21,7 +24,8 @@
             "outFiles": [
                 "${workspaceRoot}/node_modules/@theia/*/lib/**/*.js",
                 "${workspaceRoot}/browser-app/lib/**/*.js",
-                "${workspaceRoot}/browser-app/src-gen/**/*.js"
+                "${workspaceRoot}/browser-app/src-gen/**/*.js",
+                "${workspaceRoot}/**/lib/**/*.js"
             ],
             "smartStep": true,
             "internalConsoleOptions": "openOnSessionStart",
@@ -50,11 +54,23 @@
                 "${workspaceRoot}/electron-app/src-gen/frontend/electron-main.js",
                 "${workspaceRoot}/electron-app/src-gen/backend/main.js",
                 "${workspaceRoot}/electron-app/lib/**/*.js",
-                "${workspaceRoot}/node_modules/@theia/*/lib/**/*.js"
+                "${workspaceRoot}/node_modules/@theia/*/lib/**/*.js",
+                "${workspaceRoot}/node_modules/fusion-studio-extension/*/lib/**/*.js"
             ],
-            "smartStep": true,
             "internalConsoleOptions": "openOnSessionStart",
             "outputCapture": "std"
+        },
+        {
+          "name": "Debug Main Process",
+          "type": "node",
+          "request": "launch",
+          "cwd": "${workspaceFolder}",
+          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+          "windows": {
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+          },
+          "program": "${workspaceRoot}/electron-app/src-gen/frontend/electron-main.js",
+          "outputCapture": "std"
         }
     ]
 }

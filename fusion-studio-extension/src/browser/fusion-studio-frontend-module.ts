@@ -25,6 +25,7 @@ import { FSWelcomeContribution } from "./welcome-contribution";
 import { FSWelcomeService, createFSWelcomeWidget } from "./welcome-service";
 
 import { bindFSProvider } from './label-provider-command-contribution';
+import { nativePath, NativeServer } from "../common/native";
 
 export default new ContainerModule(bind => {
 
@@ -63,4 +64,8 @@ export default new ContainerModule(bind => {
   bind(ResourceResolver).toService(FSResourceResolver);
   bind(LanguageGrammarDefinitionContribution).to(XQueryGrammaribution).inSingletonScope();
   
+  bind(NativeServer).toDynamicValue(ctx => {
+    const provider = ctx.container.get(WebSocketConnectionProvider);
+    return provider.createProxy<NativeServer>(nativePath);
+  }).inSingletonScope();
 });

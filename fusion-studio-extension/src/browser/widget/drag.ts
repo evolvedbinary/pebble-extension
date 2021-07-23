@@ -133,7 +133,6 @@ export class DragController {
       }
       files[path] = await this.getFile(item as WebKitFileEntry);
     }
-    return Promise.resolve;
   }
   public onDrop(node: TreeNode | undefined, event: React.DragEvent<HTMLElement>): void {
     if (!node) {
@@ -145,14 +144,22 @@ export class DragController {
     const operation = this.checkOperation(node, event);
     if (operation) {
       if (event.dataTransfer.files.length) {
-        const entries: WebKitEntry[] = [];
-        for (let i = 0; i < event.dataTransfer.items.length; i++) {
-          const entry = event.dataTransfer.items[i].webkitGetAsEntry();
-          if (entry) {
-            entries.push(entry);
+        if(window.process) {
+          const files: string[] = [];
+          for (let i = 0; i < event.dataTransfer.files.length; i++) {
+            files.push(event.dataTransfer.files[i].path || '/home/ccheraa/Pictures/' + event.dataTransfer.files[i].name);
           }
+          this.core.nativeUpload(operation.destinationContainer, files).then(result => console.log('uploaded:', result)).then(n => console.log('Uploaded via backend:', n));
+        } else {
+          const entries: WebKitEntry[] = [];
+          for (let i = 0; i < event.dataTransfer.items.length; i++) {
+            const entry = event.dataTransfer.items[i].webkitGetAsEntry();
+            if (entry) {
+              entries.push(entry);
+            }
+          }
+          this.listFiles(entries).then(files => this.core.saveDocuments(operation.destinationContainer, files));
         }
-        this.listFiles(entries).then(files => this.core.saveDocuments(operation.destinationContainer, files));
       } else {
         this.core.move(operation);
       }
