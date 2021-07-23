@@ -68,6 +68,7 @@ lib
 # ide apps
 *-app/*
 !*-app/package.json
+!browser-app/Dockerfile
 fusion-studio-extension/src/browser/style/index.css
 
 # integration test files
@@ -80,3 +81,5 @@ cypress/screenshots/*
 # node-gyp
 build/
 fusion-studio-extension/src/variables.ts
+
+!webpack.config.js

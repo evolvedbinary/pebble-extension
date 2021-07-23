@@ -153,9 +153,20 @@ $ yarn watch
 
 **Extra**
 -   You can debug both the browser and Electron apps using VS Code launch configurations:
-  -   `"Start Browser Backend"`
-  -   `"Start Electron Backend"`
+    -   `"Start Browser Backend"`
+    -   `"Start Electron Backend"`
 -   You can compile css file at anytime by running:
 ```bash
 $ yarn run sass
 ```
+
+-   You can run Fusion Studio in a docker container.
+    -   First, you need to build the docker image:
+    ```bash
+    $ cd browser-app
+    $ docker build --rm --force-rm -t evolvedbinary/fusion-studio .
+    ```
+    -   Then, run the container and expose port 3000:
+    ```bash
+    $ docker run -ditp 3000:3000 --name fusion-studio evolvedbinary/fusion-studio
+    ```
