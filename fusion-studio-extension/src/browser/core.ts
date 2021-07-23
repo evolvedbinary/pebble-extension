@@ -244,12 +244,16 @@ export class FSCore {
         this.refreshGroups(node.connectionNode.security);
       } else if (FSNode.isIndexes(node)) {
         this.refreshIndexes(node.connectionNode);
+      } else if (FSNode.isRest(node)) {
+        node.connectionNode.rest.loaded = false;
       }
     } else {
       if (FSNode.isConnection(node)) {
         this.connect(node);
       } else if (FSNode.isCollection(node)) {
         this.load(node, node.uri);
+      } else if (FSNode.isRest(node)) {
+        this.refreshREST(node.connectionNode);
       }
     }
   }
@@ -741,6 +745,17 @@ export class FSCore {
     indexesNew.forEach(index => this.addIndex(connectionNode.indexes, index));
   }
 
+  protected async refreshREST(connectionNode: FSConnectionNode): Promise<void> {
+    const urls = connectionNode.rest.children.filter(child => FSNode.isRestURI(child)) as FSRestURINode[];
+    await Promise.all(urls.map(async url => {
+      await Promise.all((url.children.filter(method => FSNode.isRestMethod(method)) as FSRestMethodNode[]).map(method => this.removeNode(method)));
+      await this.removeNode(url);
+    }));
+    await this.removeNode(connectionNode.rest);
+    connectionNode.rest = await this.addRestNode(connectionNode);
+    this.expand(connectionNode.rest);
+  }
+
   protected async addIndexes(connectionNode: FSConnectionNode): Promise<FSIndexesNode> {
     const indexes = await FSApi.getIndexes(connectionNode.connection);
     const indexesNode = await this.addNode({
@@ -801,6 +816,7 @@ export class FSCore {
       } as FSRestMethodNode, uriNode))
     }));
     await this.sort(rest, this.sortRest);
+    rest.loaded = true;
     return rest;
   }
 
