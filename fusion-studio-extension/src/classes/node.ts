@@ -5,6 +5,8 @@ import { FSRestURI, FSRestMethod } from "./rest";
 
 
 export type FSNodeType = 'connection' | 'toolbar' | 'item' | 'users' | 'groups' | 'user' | 'group' | 'security' | 'indexes' | 'index' | 'rest' | 'rest-uri' | 'rest-method';
+export type FSLoadEvent = (mode: FSNode) => void | true | Promise<void | true>;
+
 export interface FSNode extends TreeNode {
   type: FSNodeType;
   connectionNode: FSConnectionNode;
