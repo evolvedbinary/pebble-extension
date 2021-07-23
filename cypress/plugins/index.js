@@ -58,5 +58,6 @@ module.exports = (on, config) => {
     report: process.report,
     traceDeprecation: process.traceDeprecation,
   };
+  config.env.homedir = require('os').homedir();
   return config;
 }
